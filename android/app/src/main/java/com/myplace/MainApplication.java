@@ -11,35 +11,23 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
+import com.reactnativenavigation.NavigationApplication;
 
-  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+public class MainApplication extends NavigationApplication{
+
     @Override
-    public boolean getUseDeveloperSupport() {
+    public boolean isDebug() {
       return BuildConfig.DEBUG;
     }
 
-    @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
       );
     }
 
     @Override
-    protected String getJSMainModuleName() {
-      return "index";
+    public List<ReactPackage> createAdditionalReactPackages() {
+      return getPackages();
     }
-  };
 
-  @Override
-  public ReactNativeHost getReactNativeHost() {
-    return mReactNativeHost;
-  }
-
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    SoLoader.init(this, /* native exopackage */ false);
-  }
 }
