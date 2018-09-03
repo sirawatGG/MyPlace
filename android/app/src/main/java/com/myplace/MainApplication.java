@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.reactnativenavigation.NavigationApplication;
+import com.airbnb.android.react.maps.MapsPackage;
 
 public class MainApplication extends NavigationApplication{
 
@@ -22,6 +23,7 @@ public class MainApplication extends NavigationApplication{
 
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
+        new MapsPackage()
       );
     }
 
