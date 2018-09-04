@@ -17,9 +17,10 @@ const mapPin = require('../../assets/icon_map_pin.png');
 const shareLocation = require('../../assets/bg_share_location.png');
 export default class MapView extends Component {
 
-  constructor() {
-    super();
-    this.onDragMap = false;
+  constructor(props) {
+    super(props);
+    this.refMapAddress = null;
+    this.onFetchGooglePlace = false; // to check if it's fetching
     this.state = {
       region: {
         // bts siam as default
@@ -37,20 +38,14 @@ export default class MapView extends Component {
   }
 
   onRegionChangeComplete = (region) => {
-    if (this.onDragMap) {
-      this.state.region = region;
-      this.setState({ onFinishChangeRegion: true, onFetchGooglePlace: true });
-      this.onDragMap = false;
-      this.onFetchGooglePlace(region);
-    }
+    this.state.region = region;
+    this.onFetchGooglePlace = true;
+    this.fetchGooglePlace(region);
   }
 
   onRegionChange = (region) => {
-    this.onDragMap = true;
     this.state.region = region;
-    if (this.state.onFinishChangeRegion === true) {
-      this.setState({ onFinishChangeRegion: false });
-    }
+    this.refMapAddress.onLoading();
   }
 
   onFetchGooglePlace = (region) => {
