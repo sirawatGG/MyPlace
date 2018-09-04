@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Map from 'react-native-maps';
 import Qs from 'qs';
+import { connect } from 'react-redux';
 
 import {
   View,
@@ -12,10 +14,20 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import actions from '../../redux/actions';
 import MapAddress from './MapAddress';
+
 const mapPin = require('../../assets/icon_map_pin.png');
-const shareLocation = require('../../assets/bg_share_location.png');
+const selectLocation = require('../../assets/bg_share_location.png');
+
+@connect(null, {
+  ...actions.placeActions,
+})
 export default class MapView extends Component {
+  static propTypes = {
+    navigator:       PropTypes.object.isRequired,
+    addNearLocation: PropTypes.func.isRequired,
+  }
 
   constructor(props) {
     super(props);
@@ -35,6 +47,22 @@ export default class MapView extends Component {
       animated: false,
     });
   }
+
+  componentDidMount = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          region: {
+            latitude:       position.coords.latitude,
+            longitude:      position.coords.longitude,
+            latitudeDelta:  0.01244482511001088,
+            longitudeDelta: 0.008046627044677734,
+          },
+        });
+        this.fetchGooglePlace(position.coords);
+      }, () => null,
+      { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
+    );
   }
 
   onRegionChangeComplete = (region) => {
@@ -71,7 +99,8 @@ export default class MapView extends Component {
     })}`)
       .then(response => response.json())
       .then((res) => {
-        console.log('res', res);
+        this.props.addNearLocation(res.results);
+        this.props.navigator.pop();
       }).catch((err) => { console.log('err', err); });
   }
 
