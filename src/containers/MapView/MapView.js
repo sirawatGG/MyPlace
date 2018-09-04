@@ -35,6 +35,11 @@ export default class MapView extends Component {
 
       },
     };
+    props.navigator.toggleTabs({
+      to:       'hidden',
+      animated: false,
+    });
+  }
   }
 
   onRegionChangeComplete = (region) => {
