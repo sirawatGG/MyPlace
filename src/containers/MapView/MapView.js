@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MapView from 'react-native-maps';
+import Map from 'react-native-maps';
 import Qs from 'qs';
 
 import {
@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import MapAddress from './MapAddress';
 const mapPin = require('../../assets/icon_map_pin.png');
 const shareLocation = require('../../assets/bg_share_location.png');
 export default class MapView extends Component {
@@ -80,10 +81,10 @@ export default class MapView extends Component {
   }
 
   render() {
-    const { region, AddressLocation, onFinishChangeRegion } = this.state;
+    const { region } = this.state;
     return (
       <View style={styles.container}>
-        <MapView
+        <Map
           mapType="standard"
           provider="google"
           showsUserLocation
@@ -95,27 +96,18 @@ export default class MapView extends Component {
           style={styles.map}
           region={region}
           initialRegion={region}
-        >
-        </MapView>
+        />
 
-        {onFinishChangeRegion &&
-          <View style={styles.loDetailDiv}>
-            <Text style={styles.loDetailTitle}>Address</Text>
-            <Text style={styles.loDetailText}>{AddressLocation}</Text>
-          </View>
-        }
         <MapAddress
           findNearbyPlaces={this.findNearbyPlaces}
           ref={(r) => { this.refMapAddress = r; }}
         />
 
-        {onFinishChangeRegion &&
-          <ImageBackground source={shareLocation} style={styles.shareLocation}>
-            <TouchableOpacity onPress={this.findNearbyPlaces}>
-              <Text style={styles.shareText}>Share Location</Text>
-            </TouchableOpacity>
-          </ImageBackground>
-        }
+        <ImageBackground source={selectLocation} style={styles.selectLocation}>
+          <TouchableOpacity onPress={this.findNearbyPlaces}>
+            <Text style={styles.selectText}>Select Location</Text>
+          </TouchableOpacity>
+        </ImageBackground>
 
         <Image source={mapPin} style={styles.pinMapImage} />
 
