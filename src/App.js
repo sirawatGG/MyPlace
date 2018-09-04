@@ -1,23 +1,33 @@
 import { Navigation } from 'react-native-navigation';
+import registerScreens from './screens';
 
-import { registerScreens } from './screens';
+registerScreens();
 
-registerScreens(); // this is where you register all of your app's screens
+const iconSearch = require('./assets/icon_map_pin.png');
+const favoriteTab = require('./assets/icon_favorite_active.png');
 
-// start the app
 Navigation.startTabBasedApp({
   tabs: [
     {
-      label: 'One',
-      screen: 'example.FirstTabScreen', // this is a registered name for a screen
-      icon: require('./assets/icon_favorite.png'),
-      title: 'Screen One'
+      label:  'NEARBY',
+      screen: 'NearBy',
+      icon:   iconSearch,
+      title:  'Places App',
     },
     {
-      label: 'Two',
-      screen: 'example.SecondTabScreen',
-      icon: require('./assets/icon_pin_white.png'),
-      title: 'Screen Two'
-    }
-  ]
+      label:  'FAVORITE',
+      screen: 'Favorite',
+      icon:   favoriteTab,
+      title:  'Places App',
+    },
+  ],
+  appStyle: {
+    statusBarColor:            '#0096A7',
+    navBarBackgroundColor:     '#00BBD6',
+    navBarButtonColor:         '#fff',
+    navBarTextColor:           '#fff',
+    tabBarBackgroundColor:     '#00BBD6',
+    tabBarButtonColor:         '#fff',
+    tabBarSelectedButtonColor: '#EEF291',
+  },
 });
