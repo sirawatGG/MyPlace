@@ -90,6 +90,7 @@ class MapTest extends Component {
           <View style={styles.loDetailDiv}>
             <Text style={styles.loDetailTitle}>Address</Text>
             <Text>{AddressLocation}</Text>
+            <Text style={styles.loDetailText}>{AddressLocation}</Text>
           </View>
         }
 
@@ -125,36 +126,37 @@ const styles = StyleSheet.create({
     bottom:   0,
   },
   loDetailDiv: {
-    position:        'absolute',
-    left:            30,
-    top:             13,
-    width:           350,
-    height:          60,
-    backgroundColor: '#fff',
-    elevation:       10,
-    alignItems:      'center',
-    justifyContent:  'center',
+    position:          'absolute',
+    left:              30,
+    top:               13,
+    width:             350,
+    backgroundColor:   '#fff',
+    elevation:         10,
+    alignItems:        'center',
+    justifyContent:    'center',
+    paddingHorizontal: 10,
+    paddingVertical:   10,
   },
   loDetailTitle: {
     fontSize:   15,
     fontWeight: '500',
   },
   loDetailText: {
-
+    textAlign: 'center',
   },
   pinMapImage: {
     width:    22,
     height:   29.7,
     position: 'absolute',
-    left:     (Dimensions.get('window').width / 2) - 11,
-    top:      (Dimensions.get('window').height / 2) - 45,
+    left:     (Dimensions.get('window').width / 2) - 15,
+    top:      (Dimensions.get('window').height / 2) - 60,
   },
   shareLocation: {
     width:    120,
     height:   37,
     position: 'absolute',
-    left:     (Dimensions.get('window').width / 2) - 60,
-    top:      (Dimensions.get('window').height / 2) - 60,
+    left:     (Dimensions.get('window').width / 2) - 63,
+    top:      (Dimensions.get('window').height / 2) - 100,
   },
   shareText: {
     color:     '#fff',
