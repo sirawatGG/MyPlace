@@ -13,50 +13,42 @@ import {
 const favoriteImg = require('../assets/icon_favorite.png');
 const favoriteActiveImg = require('../assets/icon_favorite_active.png');
 
-// import Icon from '../Icon/Icon';
-// import TextBig from '../Typo/TextBig';
-// import colors from '../../assets/colors';
-// <TouchableOpacity onPress={debounce(onPress, 300, { leading: true, trailing: false })} >
-// {/* {!!icon && <Icon size={iconSize} type={type} name={icon} />} */}
+const Row = ({ data, onPress }) => (
+  <View style={styles.container}>
 
-const Row = ({ fav, onPress }) => (
-
-  <TouchableOpacity onPress={onPress}>
-    <View style={styles.container}>
-      <View style={styles.rowDiv}>
-        <Text style={styles.textDetail}>
-          fdsafds hahah
-        </Text>
+    <View style={styles.firstHalf}>
+      <View style={styles.pinImgBackground}>
+        <Image source={{ uri: data.icon }} style={styles.pinWhiteImg} />
       </View>
 
-      <Image source={fav ? favoriteActiveImg : favoriteImg} style={styles.favoriteImg} />
-
+      <View style={{ flexShrink: 1 }}>
+        <Text style={styles.textDetail}> {data.name} </Text>
+        <Text style={styles.textDetail}> url link </Text>
+      </View>
     </View>
-  </TouchableOpacity>
 
+    <TouchableOpacity onPress={onPress} style={{ padding: 20, backgroundColor: 'red' }}>
+      <Image source={data.fav ? favoriteActiveImg : favoriteImg} style={styles.favoriteImg} />
+    </TouchableOpacity>
+  </View>
 );
 
 Row.propTypes = {
-  fav:     PropTypes.bool,
-  onPress: PropTypes.bool.isRequired,
-};
-
-Row.defaultProps = {
-  fav: true,
+  onPress: PropTypes.func.isRequired,
+  data:    PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical:   18,
+    paddingVertical:   7,
     flexDirection:     'row',
     alignItems:        'center',
     justifyContent:    'space-between',
-    paddingRight:      20,
-    paddingHorizontal: 20,
+    paddingLeft:       20,
     borderColor:       '#c8c7cc',
     borderBottomWidth: 0.5,
   },
-  rowDiv: {
+  firstHalf: {
     flexDirection:  'row',
     justifyContent: 'center',
   },
@@ -67,10 +59,25 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     // backgroundColor: colors.inputBottomLine,
   },
-  textDetail: {
-    marginTop: 1.5,
+  pinImgBackground: {
+    backgroundColor: '#000',
+    padding:         15,
+    width:           50,
+    height:          50,
+    borderRadius:    25,
+    justifyContent:  'center',
+    alignItems:      'center',
+    marginRight:     15,
   },
-
+  textDetail: {
+    flexDirection: 'row',
+    marginTop:     1.5,
+    flexWrap:      'wrap',
+  },
+  pinWhiteImg: {
+    width:  20,
+    height: 27,
+  },
   favoriteImg: {
     width:  25,
     height: 25,

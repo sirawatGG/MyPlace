@@ -17,7 +17,7 @@ import Row from '../../components/Row';
 export default class Favorite extends React.Component {
   static propTypes = {
     navigator:              PropTypes.object.isRequired,
-    favorite:               PropTypes.object.isRequired,
+    favorite:               PropTypes.array.isRequired,
     toggleFavoriteLocation: PropTypes.func.isRequired,
   }
 
