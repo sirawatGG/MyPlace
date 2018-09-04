@@ -22,8 +22,8 @@ class MapTest extends Component {
     this.state = {
       region: {
         // bts siam as default
-        latitude:             13.745752745321662,
-        longitude:            100.53365472704174,
+        latitude:             13.722662,
+        longitude:            100.5254523,
         latitudeDelta:        0.01244482511001088,
         longitudeDelta:       0.008046627044677734,
         onFetchGooglePlace:   true, // to check if it's fetching
