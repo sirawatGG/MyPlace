@@ -14,8 +14,8 @@ import {
 
 const mapPin = require('../../assets/icon_map_pin.png');
 const shareLocation = require('../../assets/bg_share_location.png');
+export default class MapView extends Component {
 
-class MapTest extends Component {
   constructor() {
     super();
     this.onDragMap = false;
@@ -104,6 +104,10 @@ class MapTest extends Component {
             <Text style={styles.loDetailText}>{AddressLocation}</Text>
           </View>
         }
+        <MapAddress
+          findNearbyPlaces={this.findNearbyPlaces}
+          ref={(r) => { this.refMapAddress = r; }}
+        />
 
         {onFinishChangeRegion &&
           <ImageBackground source={shareLocation} style={styles.shareLocation}>
@@ -136,25 +140,6 @@ const styles = StyleSheet.create({
     right:    0,
     bottom:   0,
   },
-  loDetailDiv: {
-    position:          'absolute',
-    left:              30,
-    top:               13,
-    width:             350,
-    backgroundColor:   '#fff',
-    elevation:         10,
-    alignItems:        'center',
-    justifyContent:    'center',
-    paddingHorizontal: 10,
-    paddingVertical:   10,
-  },
-  loDetailTitle: {
-    fontSize:   15,
-    fontWeight: '500',
-  },
-  loDetailText: {
-    textAlign: 'center',
-  },
   pinMapImage: {
     width:    22,
     height:   29.7,
@@ -162,17 +147,16 @@ const styles = StyleSheet.create({
     left:     (Dimensions.get('window').width / 2) - 15,
     top:      (Dimensions.get('window').height / 2) - 60,
   },
-  shareLocation: {
+  selectLocation: {
     width:    120,
     height:   37,
     position: 'absolute',
     left:     (Dimensions.get('window').width / 2) - 63,
     top:      (Dimensions.get('window').height / 2) - 100,
   },
-  shareText: {
+  selectText: {
     color:     '#fff',
     textAlign: 'center',
     marginTop: 4,
   },
 });
-export default MapTest;
