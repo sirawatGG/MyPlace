@@ -67,6 +67,18 @@ class MapTest extends Component {
       }).catch(() => { this.state.onFetchGooglePlace = false; });
   }
 
+  findNearbyPlaces = () => {
+    const { region } = this.state;
+    fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?${Qs.stringify({
+      location: `${region.latitude}, ${region.longitude}`,
+      radius:   100,
+    })}`)
+      .then(response => response.json())
+      .then((res) => {
+        console.log('res', res);
+      }).catch((err) => { console.log('err', err); });
+  }
+
   render() {
     const { region, AddressLocation, onFinishChangeRegion } = this.state;
     return (
@@ -79,7 +91,7 @@ class MapTest extends Component {
           onRegionChangeComplete={this.onRegionChangeComplete}
           onRegionChange={this.onRegionChange}
           showsCompass={false}
-          showsPointOfInterest={false}
+          showsPointsOfInterest={false}
           style={styles.map}
           region={region}
           initialRegion={region}
@@ -89,14 +101,13 @@ class MapTest extends Component {
         {onFinishChangeRegion &&
           <View style={styles.loDetailDiv}>
             <Text style={styles.loDetailTitle}>Address</Text>
-            <Text>{AddressLocation}</Text>
             <Text style={styles.loDetailText}>{AddressLocation}</Text>
           </View>
         }
 
         {onFinishChangeRegion &&
           <ImageBackground source={shareLocation} style={styles.shareLocation}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={this.findNearbyPlaces}>
               <Text style={styles.shareText}>Share Location</Text>
             </TouchableOpacity>
           </ImageBackground>
