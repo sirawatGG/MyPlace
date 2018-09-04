@@ -1,13 +1,18 @@
 import * as types from './consts';
 
-export function addNearLocation() {
+export function addNearLocation(places) {
   return {
-    type: types.ADD_NEAR_LOCATION,
+    type:    types.ADD_NEAR_LOCATION,
+    payload: places,
   };
 }
 
-export function addFavoriteLocation() {
+export function toggleFavoriteLocation(id, value) {
   return {
-    type: types.ADD_FAVORITE_LOCATION,
+    type:    types.TOGGLE_FAVORITE_LOCATION,
+    payload: {
+      id,
+      fav: value,
+    },
   };
 }
