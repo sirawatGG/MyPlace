@@ -1,44 +1,33 @@
 import { Navigation } from 'react-native-navigation';
-
 import registerScreens from './screens';
 
-registerScreens(); // this is where you register all of your app's screens
+registerScreens();
 
-// start the app
+const iconSearch = require('./assets/icon_map_pin.png');
+const favoriteTab = require('./assets/icon_favorite_active.png');
 
-Navigation.startSingleScreenApp({
-  screen: {
-    screen:  'Place',
-    title:   'Place App',
-    topTabs: [
-      {
-        screenId: 'Place.NearBy',
-        title:    'NEARBY',
-      },
-      {
-        screenId: 'Place.Favorite',
-        title:    'FAVORITE',
-      },
-    ],
-    animationType: 'slide-down', // optional, add transition animation to root change: 'none', 'slide-down', 'fade'
-    appStyle:      {
-      tabBarBackgroundColor:     '#00BBD6',
-      navBarButtonColor:         '#00BBD6',
-      tabBarButtonColor:         '#000',
-      navBarTextColor:           '#00BBD6',
-      tabBarSelectedButtonColor: '#ff505c',
-      navigationBarColor:        '#F06C31',
-      navBarBackgroundColor:     '#F06C31',
-      statusBarColor:            '#002b4c',
-      tabFontFamily:             'BioRhyme-Bold',
+Navigation.startTabBasedApp({
+  tabs: [
+    {
+      label:  'NEARBY',
+      screen: 'Place.NearBy',
+      icon:   iconSearch,
+      title:  'Places App',
     },
-    navigatorStyle:   {},
-    navigatorButtons: {},
-    topTabsStyle:     {
-      tabBarBackgroundColor:     '#00BBD6',
-      tabBarButtonColor:         '#00BBD6',
-      tabBarSelectedButtonColor: '#00BBD6',
-      tabFontFamily:             'BioRhyme-Bold',
+    {
+      label:  'FAVORITE',
+      screen: 'Place.Favorite',
+      icon:   favoriteTab,
+      title:  'Places App',
     },
+  ],
+  appStyle: {
+    statusBarColor:            '#0096A7',
+    navBarBackgroundColor:     '#00BBD6',
+    navBarButtonColor:         '#fff',
+    navBarTextColor:           '#fff',
+    tabBarBackgroundColor:     '#00BBD6',
+    tabBarButtonColor:         '#fff',
+    tabBarSelectedButtonColor: '#EEF291',
   },
 });
