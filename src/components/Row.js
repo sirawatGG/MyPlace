@@ -16,18 +16,16 @@ const favoriteActiveImg = require('../assets/icon_favorite_active.png');
 const Row = ({ data, onPress }) => (
   <View style={styles.container}>
 
-    <View style={styles.firstHalf}>
-      <View style={styles.pinImgBackground}>
-        <Image source={{ uri: data.icon }} style={styles.pinWhiteImg} />
-      </View>
-
-      <View style={{ flexShrink: 1 }}>
-        <Text style={styles.textDetail}> {data.name} </Text>
-        <Text style={styles.textDetail}> url link </Text>
-      </View>
+    <View style={styles.pinImgBackground}>
+      <Image source={{ uri: data.icon }} style={styles.pinWhiteImg} />
     </View>
 
-    <TouchableOpacity onPress={onPress} style={{ padding: 20, backgroundColor: 'red' }}>
+    <View style={{ flex: 1 }}>
+      <Text style={styles.textDetail}>{data.name}</Text>
+      <Text>{data.vicinity}</Text>
+    </View>
+
+    <TouchableOpacity onPress={onPress} style={{ padding: 20 }}>
       <Image source={data.fav ? favoriteActiveImg : favoriteImg} style={styles.favoriteImg} />
     </TouchableOpacity>
   </View>
@@ -43,7 +41,6 @@ const styles = StyleSheet.create({
     paddingVertical:   7,
     flexDirection:     'row',
     alignItems:        'center',
-    justifyContent:    'space-between',
     paddingLeft:       20,
     borderColor:       '#c8c7cc',
     borderBottomWidth: 0.5,
@@ -57,7 +54,6 @@ const styles = StyleSheet.create({
     width:        50,
     height:       50,
     borderRadius: 25,
-    // backgroundColor: colors.inputBottomLine,
   },
   pinImgBackground: {
     backgroundColor: '#000',
@@ -70,9 +66,7 @@ const styles = StyleSheet.create({
     marginRight:     15,
   },
   textDetail: {
-    flexDirection: 'row',
-    marginTop:     1.5,
-    flexWrap:      'wrap',
+    flex: 1,
   },
   pinWhiteImg: {
     width:  20,
