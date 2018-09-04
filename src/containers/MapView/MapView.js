@@ -48,19 +48,19 @@ export default class MapView extends Component {
     this.refMapAddress.onLoading();
   }
 
-  onFetchGooglePlace = (region) => {
+  fetchGooglePlace = (region) => {
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?${Qs.stringify({
-      latlng:   `${region.latitude}, ${region.longitude}`,
-      language: 'th',
+      latlng: `${region.latitude}, ${region.longitude}`,
     })}`)
       .then(response => response.json())
-      .then((responseJson) => {
-        console.log('responseJson', responseJson);
-        this.setState({
-          onFetchGooglePlace: false,
-          AddressLocation:    responseJson.results[0].formatted_address,
-        });
-      }).catch(() => { this.state.onFetchGooglePlace = false; });
+      .then((res) => {
+        if (res.error_message) {
+          this.refMapAddress.setAddress('limit fetch googleplace because no google api key');
+        } else {
+          this.refMapAddress.setAddress(res.results[0].formatted_address);
+        }
+        this.onFetchGooglePlace = false;
+      }).catch(() => { this.onFetchGooglePlace = false; });
   }
 
   findNearbyPlaces = () => {
