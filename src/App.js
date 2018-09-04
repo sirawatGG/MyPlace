@@ -10,13 +10,13 @@ Navigation.startTabBasedApp({
   tabs: [
     {
       label:  'NEARBY',
-      screen: 'Place.NearBy',
+      screen: 'NearBy',
       icon:   iconSearch,
       title:  'Places App',
     },
     {
       label:  'FAVORITE',
-      screen: 'Place.Favorite',
+      screen: 'Favorite',
       icon:   favoriteTab,
       title:  'Places App',
     },
